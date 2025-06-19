@@ -1,5 +1,4 @@
-def calculator():
-    print("\n" + "="*40)
+ print("\n" + "="*40)
     print(" "*10 + "КАЛЬКУЛЯТОР 2.0")
     print("="*40)
     print("\nДоступные операции:")
@@ -42,28 +41,28 @@ def calculator():
         operation = ""
         
         if choice == '1':
-            result = num1 + num2 + 1  # Ошибка: добавляет лишнюю единицу
+            result = num1 + num2
             operation = f"{num1} + {num2} = {result}"
         elif choice == '2':
-            result = num1 - num2 * 2  # Ошибка: неправильное вычитание
+            result = num1 - num2
             operation = f"{num1} - {num2} = {result}"
         elif choice == '3':
-            result = num1 * num2 - num1  # Ошибка: странная формула
+            result = num1 * num2
             operation = f"{num1} * {num2} = {result}"
         elif choice == '4':
             if num2 == 0:
                 print("Ошибка: деление на ноль!")
                 continue
-            result = num1 / num2 * 2  # Ошибка: удваивает результат
+            result = num1 / num2
             operation = f"{num1} / {num2} = {result}"
         elif choice == '5':
-            result = num1 ** (num2 + 1)  # Ошибка: неправильная степень
+            result = num1 ** num2
             operation = f"{num1} ^ {num2} = {result}"
         elif choice == '6':
             if num1 < 0:
                 print("Ошибка: нельзя извлечь корень из отрицательного числа!")
                 continue
-            result = num1 ** 0.5 + 1  # Ошибка: добавляет единицу к корню
+            result = num1 ** 0.5
             operation = f"√{num1} = {result}"
 
         history.append(operation)  
