@@ -1,75 +1,61 @@
-def calculator():
-    print("\n" + "="*40)
-    print(" "*10 + "КАЛЬКУЛЯТОР 2.0")
-    print("="*40)
-    print("\nДоступные операции:")
+def display_menu():
+    print("\nДобро пожаловать в калькулятор!")
+    print("Доступные операции:")
     print("1. Сложение (+)")
     print("2. Вычитание (-)")
     print("3. Умножение (*)")
     print("4. Деление (/)")
-    print("5. Возведение в степень (^)")
-    print("6. Квадратный корень (√)")
-    print("7. Выход\n")
+    print("5. Выход")
 
-    history = []  
+def get_numbers():
+    try:
+        num1 = float(input("Введите первое число: "))
+        num2 = float(input("Введите второе число: "))
+        return num1, num2
+    except ValueError:
+        print("Ошибка: введите числа корректно!")
+        return None, None
 
+def perform_operation(choice, num1, num2):
+    operations = {
+        '1': (lambda a, b: a + b, "+"),
+        '2': (lambda a, b: a - b, "-"),
+        '3': (lambda a, b: a * b, "*"),
+        '4': (lambda a, b: a / b if b != 0 else None, "/")
+    }
+    
+    operation, symbol = operations.get(choice, (None, None))
+    
+    if operation is None:
+        return False
+    
+    if choice == '4' and num2 == 0:
+        print("Ошибка: деление на ноль!")
+        return True
+    
+    result = operation(num1, num2)
+    print(f"Результат: {num1} {symbol} {num2} = {result}")
+    return True
+
+def calculator():
     while True:
-        choice = input("Выберите операцию (1-7): ").strip()
-
-        if choice == '7':
-            print("\nИстория операций:")
-            for op in history:
-                print(op)
-            print("\nВыход из калькулятора. До свидания!")
+        display_menu()
+        choice = input("Выберите операцию (1/2/3/4/5): ").strip()
+        
+        if choice == '5':
+            print("Выход из калькулятора. До свидания!")
             break
-
-        if choice not in ('1', '2', '3', '4', '5', '6'):
+        
+        if choice not in {'1', '2', '3', '4'}:
             print("Ошибка: неверный выбор операции!")
             continue
-
-        try:
-            if choice != '6':  
-                num1 = float(input("Введите первое число: "))
-                num2 = float(input("Введите второе число: "))
-            else:
-                num1 = float(input("Введите число: "))
-                num2 = None  
-        except ValueError:
-            print("Ошибка: введите число корректно!")
-            continue
-
-        result = None
-        operation = ""
         
-        if choice == '1':
-            result = num1 + num2
-            operation = f"{num1} + {num2} = {result}"
-        elif choice == '2':
-            result = num1 - num2
-            operation = f"{num1} - {num2} = {result}"
-        elif choice == '3':
-            result = num1 * num2
-            operation = f"{num1} * {num2} = {result}"
-        elif choice == '4':
-            if num2 == 0:
-                print("Ошибка: деление на ноль!")
-                continue
-            result = num1 / num2
-            operation = f"{num1} / {num2} = {result}"
-        elif choice == '5':
-            result = num1 ** num2
-            operation = f"{num1} ^ {num2} = {result}"
-        elif choice == '6':
-            if num1 < 0:
-                print("Ошибка: нельзя извлечь корень из отрицательного числа!")
-                continue
-            result = num1 ** 0.5
-            operation = f"√{num1} = {result}"
-
-        history.append(operation)  
-        print("\n" + "="*40)
-        print(f"Результат: {operation}")
-        print("="*40 + "\n")
+        num1, num2 = get_numbers()
+        if num1 is None or num2 is None:
+            continue
+        
+        if not perform_operation(choice, num1, num2):
+            print("Ошибка: неизвестная операция!")
 
 if __name__ == "__main__":
     calculator()
