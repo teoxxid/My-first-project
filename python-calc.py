@@ -1,5 +1,4 @@
 def display_menu():
-    """Выводит меню доступных операций."""
     print("\nДобро пожаловать в калькулятор!")
     print("Доступные операции:")
     print("1. Сложение (+)")
@@ -9,7 +8,6 @@ def display_menu():
     print("5. Выход")
 
 def get_numbers():
-    """Запрашивает у пользователя два числа и возвращает их."""
     try:
         num1 = float(input("Введите первое число: "))
         num2 = float(input("Введите второе число: "))
@@ -19,7 +17,6 @@ def get_numbers():
         return None, None
 
 def perform_operation(choice, num1, num2):
-    """Выполняет математическую операцию в зависимости от выбора."""
     operations = {
         '1': (lambda a, b: a + b, "+"),
         '2': (lambda a, b: a - b, "-"),
@@ -41,7 +38,6 @@ def perform_operation(choice, num1, num2):
     return True
 
 def calculator():
-    """Основная функция калькулятора."""
     while True:
         display_menu()
         choice = input("Выберите операцию (1/2/3/4/5): ").strip()
